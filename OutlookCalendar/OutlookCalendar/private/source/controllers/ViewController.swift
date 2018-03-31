@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  OutlookCalendarViewController.swift
 //  OutlookCalendar
 //
 //  Created by Roopa Natarajan on 3/31/18.
@@ -8,18 +8,14 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class OutlookCalendarViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
+    
+    
 
 }
 
