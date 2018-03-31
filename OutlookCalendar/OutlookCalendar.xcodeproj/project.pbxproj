@@ -15,6 +15,9 @@
 		51EC06E0206F710800DB5084 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51EC06DE206F710800DB5084 /* LaunchScreen.storyboard */; };
 		51EC06EB206F710900DB5084 /* OutlookCalendarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EC06EA206F710900DB5084 /* OutlookCalendarTests.swift */; };
 		51EC06F6206F710900DB5084 /* OutlookCalendarUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EC06F5206F710900DB5084 /* OutlookCalendarUITests.swift */; };
+		51EC0709206F721200DB5084 /* CalendarViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EC0708206F721200DB5084 /* CalendarViewCell.swift */; };
+		51EC070B206F722E00DB5084 /* CalendarCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EC070A206F722E00DB5084 /* CalendarCollectionViewController.swift */; };
+		51EC070E206F790200DB5084 /* UXUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EC070D206F790200DB5084 /* UXUtil.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,9 @@
 		51EC06F1206F710900DB5084 /* OutlookCalendarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OutlookCalendarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		51EC06F5206F710900DB5084 /* OutlookCalendarUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlookCalendarUITests.swift; sourceTree = "<group>"; };
 		51EC06F7206F710900DB5084 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		51EC0708206F721200DB5084 /* CalendarViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewCell.swift; sourceTree = "<group>"; };
+		51EC070A206F722E00DB5084 /* CalendarCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewController.swift; sourceTree = "<group>"; };
+		51EC070D206F790200DB5084 /* UXUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXUtil.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,8 +105,8 @@
 		51EC06D1206F710800DB5084 /* OutlookCalendar */ = {
 			isa = PBXGroup;
 			children = (
+				51EC0704206F71C900DB5084 /* private */,
 				51EC06D2206F710800DB5084 /* AppDelegate.swift */,
-				51EC06D4206F710800DB5084 /* ViewController.swift */,
 				51EC06D6206F710800DB5084 /* Main.storyboard */,
 				51EC06DC206F710800DB5084 /* Assets.xcassets */,
 				51EC06DE206F710800DB5084 /* LaunchScreen.storyboard */,
@@ -126,6 +132,49 @@
 				51EC06F7206F710900DB5084 /* Info.plist */,
 			);
 			path = OutlookCalendarUITests;
+			sourceTree = "<group>";
+		};
+		51EC0704206F71C900DB5084 /* private */ = {
+			isa = PBXGroup;
+			children = (
+				51EC0705206F71D100DB5084 /* source */,
+			);
+			path = private;
+			sourceTree = "<group>";
+		};
+		51EC0705206F71D100DB5084 /* source */ = {
+			isa = PBXGroup;
+			children = (
+				51EC070C206F78AF00DB5084 /* utils */,
+				51EC0707206F71DD00DB5084 /* controllers */,
+				51EC0706206F71D900DB5084 /* views */,
+			);
+			path = source;
+			sourceTree = "<group>";
+		};
+		51EC0706206F71D900DB5084 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				51EC0708206F721200DB5084 /* CalendarViewCell.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		51EC0707206F71DD00DB5084 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				51EC06D4206F710800DB5084 /* ViewController.swift */,
+				51EC070A206F722E00DB5084 /* CalendarCollectionViewController.swift */,
+			);
+			path = controllers;
+			sourceTree = "<group>";
+		};
+		51EC070C206F78AF00DB5084 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				51EC070D206F790200DB5084 /* UXUtil.swift */,
+			);
+			path = utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,6 +313,9 @@
 			files = (
 				51EC06DB206F710800DB5084 /* OutlookCalendar.xcdatamodeld in Sources */,
 				51EC06D5206F710800DB5084 /* ViewController.swift in Sources */,
+				51EC070E206F790200DB5084 /* UXUtil.swift in Sources */,
+				51EC070B206F722E00DB5084 /* CalendarCollectionViewController.swift in Sources */,
+				51EC0709206F721200DB5084 /* CalendarViewCell.swift in Sources */,
 				51EC06D3206F710800DB5084 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

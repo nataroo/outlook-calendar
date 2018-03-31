@@ -1,5 +1,5 @@
 //
-//  OutlookCalendarViewController.swift
+//  ViewController.swift
 //  OutlookCalendar
 //
 //  Created by Roopa Natarajan on 3/31/18.
@@ -8,14 +8,15 @@
 
 import UIKit
 
-class OutlookCalendarViewController: UIViewController {
+class ViewController: UIViewController {
 
+    private var calendarVC = CalendarCollectionViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        self.addChildViewController(calendarVC)
+        self.view.addSubview(calendarVC.view)
+        UXUtil.createHorizontalConstraints(calendarVC.view, outerView: self.view, margin: 0)
     }
-    
-    
-
 }
-

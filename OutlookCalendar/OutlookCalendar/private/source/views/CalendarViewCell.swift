@@ -7,3 +7,39 @@
 //
 
 import Foundation
+import UIKit
+
+class CalendarViewCell: UICollectionViewCell {
+    static let id = NSStringFromClass(CalendarViewCell.self)
+    
+    private var label = UILabel()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.setupLayout()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.setupLayout()
+    }
+    
+    func setupLayout() {
+        self.addSubview(self.label)
+        UXUtil.createHorizontalConstraints(label, outerView: self, margin: 0)
+        UXUtil.createVerticalConstraints(label, outerView: self, margin: 0)
+        self.label.textAlignment = NSTextAlignment.center
+        self.label.translatesAutoresizingMaskIntoConstraints = false
+        self.prepareForReuse()
+    }
+    
+    func setup(data: String) {
+        self.label.text = data
+        self.label.textColor = UIColor.black
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.label.text = nil
+    }
+}
