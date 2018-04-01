@@ -12,13 +12,14 @@ import UIKit
 class CalendarCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     init() {
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.minimumInteritemSpacing = 1
+        let flowLayout = CustomFlowLayout()
+        flowLayout.minimumInteritemSpacing = 0
         flowLayout.minimumLineSpacing = 1
         super.init(collectionViewLayout: flowLayout)
         
         self.collectionView?.register(CalendarViewCell.self, forCellWithReuseIdentifier: CalendarViewCell.id)
         self.collectionView?.isScrollEnabled = true
+        self.collectionView?.backgroundColor = UIColor.clear
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -52,7 +53,7 @@ class CalendarCollectionViewController: UICollectionViewController, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 1, left: 0, bottom: 0, right: 0)
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
 }
 

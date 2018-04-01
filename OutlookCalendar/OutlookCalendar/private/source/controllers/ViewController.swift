@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.view.backgroundColor = UIColor.white
         self.addChildViewController(calendarVC)
         self.view.addSubview(calendarVC.view)
         UXUtil.createHorizontalConstraints(calendarVC.view, outerView: self.view, margin: 0)

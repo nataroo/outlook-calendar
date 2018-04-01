@@ -18,6 +18,9 @@
 		51EC0709206F721200DB5084 /* CalendarViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EC0708206F721200DB5084 /* CalendarViewCell.swift */; };
 		51EC070B206F722E00DB5084 /* CalendarCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EC070A206F722E00DB5084 /* CalendarCollectionViewController.swift */; };
 		51EC070E206F790200DB5084 /* UXUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EC070D206F790200DB5084 /* UXUtil.swift */; };
+		51EC07102070583600DB5084 /* AgendaTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EC070F2070583600DB5084 /* AgendaTableViewController.swift */; };
+		51EC07122070B6F100DB5084 /* SeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EC07112070B6F100DB5084 /* SeparatorView.swift */; };
+		51EC07142070B75A00DB5084 /* CustomFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EC07132070B75A00DB5084 /* CustomFlowLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +58,9 @@
 		51EC0708206F721200DB5084 /* CalendarViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewCell.swift; sourceTree = "<group>"; };
 		51EC070A206F722E00DB5084 /* CalendarCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewController.swift; sourceTree = "<group>"; };
 		51EC070D206F790200DB5084 /* UXUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UXUtil.swift; sourceTree = "<group>"; };
+		51EC070F2070583600DB5084 /* AgendaTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaTableViewController.swift; sourceTree = "<group>"; };
+		51EC07112070B6F100DB5084 /* SeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorView.swift; sourceTree = "<group>"; };
+		51EC07132070B75A00DB5084 /* CustomFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFlowLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +162,8 @@
 			isa = PBXGroup;
 			children = (
 				51EC0708206F721200DB5084 /* CalendarViewCell.swift */,
+				51EC07112070B6F100DB5084 /* SeparatorView.swift */,
+				51EC07132070B75A00DB5084 /* CustomFlowLayout.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -165,6 +173,7 @@
 			children = (
 				51EC06D4206F710800DB5084 /* ViewController.swift */,
 				51EC070A206F722E00DB5084 /* CalendarCollectionViewController.swift */,
+				51EC070F2070583600DB5084 /* AgendaTableViewController.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -313,9 +322,12 @@
 			files = (
 				51EC06DB206F710800DB5084 /* OutlookCalendar.xcdatamodeld in Sources */,
 				51EC06D5206F710800DB5084 /* ViewController.swift in Sources */,
+				51EC07122070B6F100DB5084 /* SeparatorView.swift in Sources */,
+				51EC07102070583600DB5084 /* AgendaTableViewController.swift in Sources */,
 				51EC070E206F790200DB5084 /* UXUtil.swift in Sources */,
 				51EC070B206F722E00DB5084 /* CalendarCollectionViewController.swift in Sources */,
 				51EC0709206F721200DB5084 /* CalendarViewCell.swift in Sources */,
+				51EC07142070B75A00DB5084 /* CustomFlowLayout.swift in Sources */,
 				51EC06D3206F710800DB5084 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
