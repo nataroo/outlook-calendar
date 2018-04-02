@@ -69,13 +69,14 @@ class UXUtil: NSObject {
         parent.addConstraint(constraint)
     }
     
-    static func createHeightConstraint(_ view: UIView, height: CGFloat) {
+    static func createHeightConstraint(_ view: UIView, height: CGFloat) -> NSLayoutConstraint? {
         let constraints = NSLayoutConstraint.constraints(
             withVisualFormat: "V:[myView(==\(height))]",
             options: NSLayoutFormatOptions(),
             metrics: nil,
             views: ["myView": view])
         view.addConstraints(constraints)
+        return constraints.first
     }
     
     static func createWidthConstraint(_ view: UIView, width: CGFloat) {

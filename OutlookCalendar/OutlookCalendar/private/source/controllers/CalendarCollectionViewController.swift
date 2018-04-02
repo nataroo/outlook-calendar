@@ -11,6 +11,14 @@ import UIKit
 
 class CalendarCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    public weak var calendarDelegate: CalendarDelegate?
+    public var heightConstraint: NSLayoutConstraint?
+    var selectedDateInAgenda: String = "1" {
+        didSet {
+            self.didSetDate()
+        }
+    }
+    
     init() {
         let flowLayout = CustomFlowLayout()
         flowLayout.minimumInteritemSpacing = 0
@@ -25,7 +33,7 @@ class CalendarCollectionViewController: UICollectionViewController, UICollection
                                         withReuseIdentifier: WeekHeaderView.id)
         self.collectionView?.isScrollEnabled = true
         self.collectionView?.backgroundColor = UIColor.clear
-        UXUtil.createHeightConstraint(self.view, height: 300)
+        self.heightConstraint = UXUtil.createHeightConstraint(self.view, height: 200)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -44,12 +52,20 @@ class CalendarCollectionViewController: UICollectionViewController, UICollection
         let data = (indexPath[0] * 7) + indexPath[1] + 1
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarViewCell.id, for: indexPath)
         (cell as? CalendarViewCell)?.setup(data: data)
-        cell.backgroundColor = UIColor.white
+        var isSelected = false
+        
+        if Int(self.selectedDateInAgenda) == data {
+            isSelected = true
+        }
+    
+        cell.backgroundColor = isSelected ? UIColor.blue : UIColor.white
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        if let delegate = self.calendarDelegate {
+            delegate.didCalendarSelectDate(data: String((indexPath[0] * 7) + indexPath[1] + 1))
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -78,6 +94,34 @@ class CalendarCollectionViewController: UICollectionViewController, UICollection
             return supplementaryView
         }
         return UICollectionReusableView()
+    }
+    
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.expandOrCollapse(height: 300)
+    }
+    
+    public func expandOrCollapse(height: CGFloat) {
+        DispatchQueue.main.async {
+            if let heightConstraint = self.heightConstraint {
+                UIView.animate(
+                    withDuration: 5,
+                    delay: 0,
+                    options: UIViewAnimationOptions.repeat,
+                    animations: { [weak self]() -> Void in
+                        heightConstraint.constant = height
+                    }, completion: { _ -> Void in
+                })
+            }
+        }
+    }
+    
+    func didSetDate() {
+        let row = Int(self.selectedDateInAgenda)! / 7
+        let col = Int(self.selectedDateInAgenda)! % 7
+        DispatchQueue.main.async {
+            self.collectionView?.scrollToItem(at: IndexPath(item: col, section: row), at: UICollectionViewScrollPosition.centeredVertically, animated: true)
+            self.collectionView?.reloadData()
+        }
     }
 }
 

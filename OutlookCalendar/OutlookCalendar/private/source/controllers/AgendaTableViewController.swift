@@ -11,6 +11,13 @@ import UIKit
 
 class AgendaTableViewController: UITableViewController {
     
+    public weak var agendaDelegate: AgendaDelegate?
+    public var selectedDateInCalendar: String = "1" {
+        didSet {
+            self.didSetDate()
+        }
+    }
+    
     override init(style: UITableViewStyle) {
         super.init(style: style)
     }
@@ -50,5 +57,28 @@ class AgendaTableViewController: UITableViewController {
         (cell as? EventViewCell)?.setup(data: data)
         cell.backgroundColor = UIColor.white
         return cell
+    }
+    
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        if let delegate = self.agendaDelegate {
+            delegate.willAgendaViewBeginScroll()
+        }
+    }
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if let delegate = self.agendaDelegate {
+            if let indexPath = self.tableView.indexPathsForVisibleRows?.first {
+                delegate.didScrollToDate(data: String(indexPath[0] + 1))
+            }
+        }
+    }
+    
+    func didSetDate() {
+        DispatchQueue.main.async {
+            if let secNumber = Int(self.selectedDateInCalendar) {
+                let indexPath = IndexPath(item: 0, section: secNumber - 1)
+                self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+            }
+        }
     }
 }
