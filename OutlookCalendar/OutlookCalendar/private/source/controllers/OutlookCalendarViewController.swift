@@ -44,14 +44,15 @@ class OutlookCalendarViewController: UIViewController, CalendarDelegate, AgendaD
     }
     
     func didCalendarSelectDate(data: String) {
-        self.agendaVC.selectedDateInCalendar = data
+        self.agendaVC.selectDate(data: data)
     }
     
     func willAgendaViewBeginScroll() {
-        self.calendarVC.expandOrCollapse(height: 200)
+        self.calendarVC.expandOrCollapse(height: 150)
+        self.calendarVC.didUserSelectInCalendar = false
     }
     
     func didScrollToDate(data: String) {
-        self.calendarVC.selectedDateInAgenda = data
+        self.calendarVC.selectDate(data: data)
     }
 }

@@ -12,11 +12,7 @@ import UIKit
 class AgendaTableViewController: UITableViewController {
     
     public weak var agendaDelegate: AgendaDelegate?
-    public var selectedDateInCalendar: String = "1" {
-        didSet {
-            self.didSetDate()
-        }
-    }
+    private var selectedDate: String = "1"
     
     override init(style: UITableViewStyle) {
         super.init(style: style)
@@ -73,9 +69,10 @@ class AgendaTableViewController: UITableViewController {
         }
     }
     
-    func didSetDate() {
+    func selectDate(data: String) {
+        self.selectedDate = data
         DispatchQueue.main.async {
-            if let secNumber = Int(self.selectedDateInCalendar) {
+            if let secNumber = Int(self.selectedDate) {
                 let indexPath = IndexPath(item: 0, section: secNumber - 1)
                 self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
             }
