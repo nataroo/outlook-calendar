@@ -57,7 +57,7 @@ class UXUtil: NSObject {
         to: UIView?,
         constraint: NSLayoutAttribute,
         margin: CGFloat,
-        relatedBy: NSLayoutRelation = .equal) -> NSLayoutConstraint {
+        relatedBy: NSLayoutRelation = .equal) {
         let constraint = NSLayoutConstraint(
             item: from,
             attribute: constraint,
@@ -67,27 +67,24 @@ class UXUtil: NSObject {
             multiplier: 1,
             constant: margin)
         parent.addConstraint(constraint)
-        return constraint
     }
     
-    static func createHeightConstraint(_ view: UIView, height: CGFloat) -> NSLayoutConstraint? {
+    static func createHeightConstraint(_ view: UIView, height: CGFloat) {
         let constraints = NSLayoutConstraint.constraints(
             withVisualFormat: "V:[myView(==\(height))]",
             options: NSLayoutFormatOptions(),
             metrics: nil,
             views: ["myView": view])
         view.addConstraints(constraints)
-        return constraints.first
     }
     
-    static func createWidthConstraint(_ view: UIView, width: CGFloat) -> NSLayoutConstraint? {
+    static func createWidthConstraint(_ view: UIView, width: CGFloat) {
         let constraints = NSLayoutConstraint.constraints(
             withVisualFormat: "H:[myView(==\(width))]",
             options: NSLayoutFormatOptions(),
             metrics: nil,
             views: ["myView": view])
         view.addConstraints(constraints)
-        return constraints.first
     }
     
     // Creates constraint to align the bottomView under the topView
@@ -96,7 +93,7 @@ class UXUtil: NSObject {
         parent: UIView,
         topView: UIView?,
         margin: CGFloat,
-        priority: UILayoutPriority? = nil) -> NSLayoutConstraint {
+        priority: UILayoutPriority? = nil) {
         let constraint = NSLayoutConstraint(
             item: bottomView,
             attribute: .top,
@@ -109,11 +106,10 @@ class UXUtil: NSObject {
             constraint.priority = priority
         }
         parent.addConstraint(constraint)
-        return constraint
     }
     
     // Creates constraint to align trailingView after leadingView horizontally
-    static func createTrailingViewToLeadingViewConstraint(_ trailingView: UIView, parent: UIView, leadingView: UIView, margin: CGFloat) -> NSLayoutConstraint {
+    static func createTrailingViewToLeadingViewConstraint(_ trailingView: UIView, parent: UIView, leadingView: UIView, margin: CGFloat) {
         let constraint = NSLayoutConstraint(
             item: trailingView,
             attribute: .leading,
@@ -123,7 +119,6 @@ class UXUtil: NSObject {
             multiplier: 1,
             constant: margin)
         parent.addConstraint(constraint)
-        return constraint
     }
     
     static func centerView(_ innerView: UIView, outerView: UIView, parent: UIView? = nil, x: Bool = true, y: Bool = true) {

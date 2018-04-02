@@ -1,21 +1,21 @@
 //
-//  CalendarViewCell.swift
+//  EventViewCell.swift
 //  OutlookCalendar
 //
-//  Created by Roopa Natarajan on 3/31/18.
+//  Created by Roopa Natarajan on 4/1/18.
 //  Copyright © 2018 Microsoft. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class CalendarViewCell: UICollectionViewCell {
-    static let id = NSStringFromClass(CalendarViewCell.self)
+class EventViewCell: UITableViewCell {
+    static let id = NSStringFromClass(EventViewCell.self)
     
     private var label = UILabel()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.setupLayout()
     }
     
@@ -26,6 +26,7 @@ class CalendarViewCell: UICollectionViewCell {
     
     func setupLayout() {
         self.addSubview(self.label)
+        self.label.frame = self.frame
         UXUtil.createHorizontalConstraints(label, outerView: self, margin: 0)
         UXUtil.createVerticalConstraints(label, outerView: self, margin: 0)
         self.label.textAlignment = NSTextAlignment.center
@@ -33,8 +34,8 @@ class CalendarViewCell: UICollectionViewCell {
         self.prepareForReuse()
     }
     
-    func setup(data: Int) {
-        self.label.text = String(data)
+    func setup(data: String) {
+        self.label.text = data
         self.label.textColor = UIColor.black
     }
     

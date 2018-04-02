@@ -40,7 +40,7 @@ class CalendarCollectionViewController: UICollectionViewController, UICollection
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let data = "1"
+        let data = (indexPath[0] * 7) + indexPath[1] + 1
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarViewCell.id, for: indexPath)
         (cell as? CalendarViewCell)?.setup(data: data)
         cell.backgroundColor = UIColor.white

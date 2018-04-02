@@ -1,15 +1,15 @@
 //
-//  ViewController.swift
+//  OutlookCalendarViewController.swift
 //  OutlookCalendar
 //
-//  Created by Roopa Natarajan on 3/31/18.
+//  Created by Roopa Natarajan on 4/2/18.
 //  Copyright © 2018 Microsoft. All rights reserved.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class OutlookCalendarViewController: UIViewController {
+    
     private var calendarVC = CalendarCollectionViewController()
     private var agendaVC = AgendaTableViewController()
     
