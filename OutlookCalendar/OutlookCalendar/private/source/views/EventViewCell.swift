@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+// Cell class for AgendaTableViewController
+
 class EventViewCell: UITableViewCell {
     static let id = NSStringFromClass(EventViewCell.self)
     

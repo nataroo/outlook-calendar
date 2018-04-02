@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+// Separator line drawn between each section in CalendarCollectionViewController
+
 class SeparatorView: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)

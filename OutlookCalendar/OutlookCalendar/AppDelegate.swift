@@ -15,9 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        // Capture the main screen and set navigationController as the rootViewController
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let mainViewController = MainViewController() as UIViewController
+        // navigationController's first screen would be mainViewController
         let navigationController = UINavigationController(rootViewController: mainViewController)
         navigationController.navigationBar.isTranslucent = false
         self.window?.rootViewController = navigationController

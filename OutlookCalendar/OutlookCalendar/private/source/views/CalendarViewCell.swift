@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+// Cell class for CalendarCollectionViewController
+
 class CalendarViewCell: UICollectionViewCell {
     static let id = NSStringFromClass(CalendarViewCell.self)
     
@@ -26,6 +28,7 @@ class CalendarViewCell: UICollectionViewCell {
     
     func setupLayout() {
         self.addSubview(self.label)
+        // Align the label to occupy the entire cell
         UXUtil.createHorizontalConstraints(label, outerView: self, margin: 0)
         UXUtil.createVerticalConstraints(label, outerView: self, margin: 0)
         self.label.textAlignment = NSTextAlignment.center

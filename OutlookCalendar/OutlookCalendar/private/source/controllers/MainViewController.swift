@@ -16,6 +16,7 @@ class MainViewController: UIViewController {
         let outlookCalendarVC = OutlookCalendarViewController()
         self.addChildViewController(outlookCalendarVC)
         self.view.addSubview(outlookCalendarVC.view)
+        // Align outlookCalendarVC to mainVC vertically and horizontally
         UXUtil.createVerticalConstraints(outlookCalendarVC.view, outerView: self.view, margin: 0)
         UXUtil.createHorizontalConstraints(outlookCalendarVC.view, outerView: self.view, margin: 0)
     }

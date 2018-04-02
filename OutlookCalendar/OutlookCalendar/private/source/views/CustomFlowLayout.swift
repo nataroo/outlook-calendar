@@ -11,6 +11,8 @@ import UIKit
 
 private let separatorDecorationView = "separator"
 
+// Custom UICollectionViewFlowLayout to handle separator line as decoration view
+
 class CustomFlowLayout: UICollectionViewFlowLayout {
     
     override init() {
@@ -23,15 +25,18 @@ class CustomFlowLayout: UICollectionViewFlowLayout {
     }
 
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        // Get all layout attributes
         let layoutAttributes = super.layoutAttributesForElements(in: rect) ?? []
         let lineWidth = self.minimumLineSpacing
         
         var decorationAttributes: [UICollectionViewLayoutAttributes] = []
         
+        // Don't draw a separator for the first section (header will do that)
         for layoutAttribute in layoutAttributes where layoutAttribute.indexPath[0] != 0 {
             let separatorAttribute = UICollectionViewLayoutAttributes(forDecorationViewOfKind: separatorDecorationView,
                                                                       with: layoutAttribute.indexPath)
             let cellFrame = layoutAttribute.frame
+            // Attributes for the separator line
             separatorAttribute.frame = CGRect(x: cellFrame.origin.x,
                                               y: cellFrame.origin.y - lineWidth,
                                               width: cellFrame.size.width,
@@ -39,7 +44,7 @@ class CustomFlowLayout: UICollectionViewFlowLayout {
             separatorAttribute.zIndex = Int.max
             decorationAttributes.append(separatorAttribute)
         }
-        
+        // Return existing attributes plus newly created ones for separator
         return layoutAttributes + decorationAttributes
     }
     

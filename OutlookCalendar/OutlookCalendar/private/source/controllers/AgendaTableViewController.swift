@@ -32,6 +32,7 @@ class AgendaTableViewController: UITableViewController {
         self.tableView.estimatedRowHeight = 60
         self.tableView.estimatedSectionHeaderHeight = 20
         self.tableView.estimatedSectionFooterHeight = 0
+        // Register the event view cell
         self.tableView.register(EventViewCell.self, forCellReuseIdentifier: EventViewCell.id)
     }
     
@@ -57,6 +58,7 @@ class AgendaTableViewController: UITableViewController {
     
     override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         if let delegate = self.agendaDelegate {
+            // Inform the delegate that user started scrolling in AgendaVC
             delegate.willAgendaViewBeginScroll()
         }
     }
@@ -64,6 +66,7 @@ class AgendaTableViewController: UITableViewController {
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if let delegate = self.agendaDelegate {
             if let indexPath = self.tableView.indexPathsForVisibleRows?.first {
+                // Inform the delegate that user scrolled to a date in AgendaVC
                 delegate.didScrollToDate(data: String(indexPath[0] + 1))
             }
         }

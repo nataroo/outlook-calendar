@@ -13,15 +13,19 @@ class WeekHeaderView: UICollectionReusableView {
     
     static let id = NSStringFromClass(WeekHeaderView.self)
     
+    // Days of the week
     private var weekDays: [String] = [ "S", "M", "T", "W", "T", "F", "S" ]
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        // Create a horizontal stack view to put 7 labels next to each other
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = UILayoutConstraintAxis.horizontal
+        // No gap between the labels
         stackView.spacing = 0
         stackView.distribution = .fillEqually
+        // -1 for separator in the bottom
         stackView.frame = CGRect(x: frame.minX, y: frame.minY, width: frame.width, height: frame.height - 1)
         let width = frame.width / 7
         var index: CGFloat = 0.0
@@ -40,6 +44,7 @@ class WeekHeaderView: UICollectionReusableView {
         UXUtil.createHorizontalConstraints(stackView, outerView: self, margin: 0)
         UXUtil.createConstraint(stackView, parent: self, to: self, constraint: .top, margin: 0)
         
+        // Add a 1 px separator line below the stack view
         let separatorView = UIView()
         separatorView.frame = CGRect(x: frame.minX, y: frame.minY, width: frame.width, height: 1)
         separatorView.translatesAutoresizingMaskIntoConstraints = false
