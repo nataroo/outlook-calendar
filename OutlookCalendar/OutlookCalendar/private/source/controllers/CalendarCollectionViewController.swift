@@ -16,7 +16,7 @@ class CalendarCollectionViewController: UICollectionViewController, UICollection
         flowLayout.minimumInteritemSpacing = 0
         flowLayout.minimumLineSpacing = 1
         // TODO - This is supposed to pin the header to the top while scrolling, but doesn't work
-        flowLayout.sectionHeadersPinToVisibleBounds = true
+//        flowLayout.sectionHeadersPinToVisibleBounds = true
         super.init(collectionViewLayout: flowLayout)
         
         self.collectionView?.register(CalendarViewCell.self, forCellWithReuseIdentifier: CalendarViewCell.id)
@@ -25,6 +25,7 @@ class CalendarCollectionViewController: UICollectionViewController, UICollection
                                         withReuseIdentifier: WeekHeaderView.id)
         self.collectionView?.isScrollEnabled = true
         self.collectionView?.backgroundColor = UIColor.clear
+        UXUtil.createHeightConstraint(self.view, height: 300)
     }
     
     required init?(coder aDecoder: NSCoder) {

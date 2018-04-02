@@ -14,9 +14,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+//        if let window = self.window {
+//            window.rootViewController = OutlookCalendarViewController()
+//            window.makeKeyAndVisible()
+//        }
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        let outlookCalendarController = OutlookCalendarViewController() as UIViewController
+//        let navigationController = UINavigationController(rootViewController: outlookCalendarController)
+//        navigationController.navigationBar.isTranslucent = false
+        self.window?.rootViewController = outlookCalendarController
+        self.window?.makeKeyAndVisible()
         return true
     }
 

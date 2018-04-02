@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		51EC06D3206F710800DB5084 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EC06D2206F710800DB5084 /* AppDelegate.swift */; };
-		51EC06D5206F710800DB5084 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EC06D4206F710800DB5084 /* ViewController.swift */; };
-		51EC06D8206F710800DB5084 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51EC06D6206F710800DB5084 /* Main.storyboard */; };
 		51EC06DB206F710800DB5084 /* OutlookCalendar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 51EC06D9206F710800DB5084 /* OutlookCalendar.xcdatamodeld */; };
 		51EC06DD206F710800DB5084 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51EC06DC206F710800DB5084 /* Assets.xcassets */; };
 		51EC06E0206F710800DB5084 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51EC06DE206F710800DB5084 /* LaunchScreen.storyboard */; };
@@ -46,8 +44,6 @@
 /* Begin PBXFileReference section */
 		51EC06CF206F710800DB5084 /* OutlookCalendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OutlookCalendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51EC06D2206F710800DB5084 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		51EC06D4206F710800DB5084 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		51EC06D7206F710800DB5084 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		51EC06DA206F710800DB5084 /* OutlookCalendar.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = OutlookCalendar.xcdatamodel; sourceTree = "<group>"; };
 		51EC06DC206F710800DB5084 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		51EC06DF206F710800DB5084 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -119,7 +115,6 @@
 			children = (
 				51EC0704206F71C900DB5084 /* private */,
 				51EC06D2206F710800DB5084 /* AppDelegate.swift */,
-				51EC06D6206F710800DB5084 /* Main.storyboard */,
 				51EC06DC206F710800DB5084 /* Assets.xcassets */,
 				51EC06DE206F710800DB5084 /* LaunchScreen.storyboard */,
 				51EC06E1206F710800DB5084 /* Info.plist */,
@@ -179,7 +174,6 @@
 		51EC0707206F71DD00DB5084 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
-				51EC06D4206F710800DB5084 /* ViewController.swift */,
 				51EC070A206F722E00DB5084 /* CalendarCollectionViewController.swift */,
 				51EC070F2070583600DB5084 /* AgendaTableViewController.swift */,
 				51EC07192072107D00DB5084 /* OutlookCalendarViewController.swift */,
@@ -304,7 +298,6 @@
 			files = (
 				51EC06E0206F710800DB5084 /* LaunchScreen.storyboard in Resources */,
 				51EC06DD206F710800DB5084 /* Assets.xcassets in Resources */,
-				51EC06D8206F710800DB5084 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,7 +325,6 @@
 				51EC06DB206F710800DB5084 /* OutlookCalendar.xcdatamodeld in Sources */,
 				51EC07162070BDC400DB5084 /* WeekHeaderView.swift in Sources */,
 				51EC07182072082000DB5084 /* EventViewCell.swift in Sources */,
-				51EC06D5206F710800DB5084 /* ViewController.swift in Sources */,
 				51EC071A2072107D00DB5084 /* OutlookCalendarViewController.swift in Sources */,
 				51EC07122070B6F100DB5084 /* SeparatorView.swift in Sources */,
 				51EC07102070583600DB5084 /* AgendaTableViewController.swift in Sources */,
@@ -376,14 +368,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		51EC06D6206F710800DB5084 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				51EC06D7206F710800DB5084 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		51EC06DE206F710800DB5084 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
