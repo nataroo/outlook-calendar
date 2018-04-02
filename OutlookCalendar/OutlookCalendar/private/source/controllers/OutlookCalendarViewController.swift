@@ -27,8 +27,6 @@ class OutlookCalendarViewController: UIViewController, CalendarDelegate, AgendaD
         self.view.translatesAutoresizingMaskIntoConstraints = false
         self.calendarVC.view.translatesAutoresizingMaskIntoConstraints = false
         self.agendaVC.view.translatesAutoresizingMaskIntoConstraints = false
-//        let navBarHeight = self.navigationController?.navigationBar.frame.height
-//        self.view.frame = CGRect(x: 0, y: 88, width: UIScreen.main.bounds.width, height: 724)
         self.view.backgroundColor = UIColor.white
         self.addChildViewController(calendarVC)
         self.view.addSubview(calendarVC.view)

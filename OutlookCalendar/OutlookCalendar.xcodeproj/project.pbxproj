@@ -22,6 +22,7 @@
 		51EC07162070BDC400DB5084 /* WeekHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EC07152070BDC400DB5084 /* WeekHeaderView.swift */; };
 		51EC07182072082000DB5084 /* EventViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EC07172072082000DB5084 /* EventViewCell.swift */; };
 		51EC071A2072107D00DB5084 /* OutlookCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EC07192072107D00DB5084 /* OutlookCalendarViewController.swift */; };
+		51EC071C20724AD000DB5084 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EC071B20724AD000DB5084 /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		51EC07152070BDC400DB5084 /* WeekHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekHeaderView.swift; sourceTree = "<group>"; };
 		51EC07172072082000DB5084 /* EventViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewCell.swift; sourceTree = "<group>"; };
 		51EC07192072107D00DB5084 /* OutlookCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlookCalendarViewController.swift; sourceTree = "<group>"; };
+		51EC071B20724AD000DB5084 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +179,7 @@
 				51EC070A206F722E00DB5084 /* CalendarCollectionViewController.swift */,
 				51EC070F2070583600DB5084 /* AgendaTableViewController.swift */,
 				51EC07192072107D00DB5084 /* OutlookCalendarViewController.swift */,
+				51EC071B20724AD000DB5084 /* MainViewController.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 				51EC06DB206F710800DB5084 /* OutlookCalendar.xcdatamodeld in Sources */,
 				51EC07162070BDC400DB5084 /* WeekHeaderView.swift in Sources */,
 				51EC07182072082000DB5084 /* EventViewCell.swift in Sources */,
+				51EC071C20724AD000DB5084 /* MainViewController.swift in Sources */,
 				51EC071A2072107D00DB5084 /* OutlookCalendarViewController.swift in Sources */,
 				51EC07122070B6F100DB5084 /* SeparatorView.swift in Sources */,
 				51EC07102070583600DB5084 /* AgendaTableViewController.swift in Sources */,
