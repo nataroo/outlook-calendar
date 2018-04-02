@@ -28,7 +28,7 @@ class CustomFlowLayout: UICollectionViewFlowLayout {
         
         var decorationAttributes: [UICollectionViewLayoutAttributes] = []
         
-        for layoutAttribute in layoutAttributes {
+        for layoutAttribute in layoutAttributes where layoutAttribute.indexPath[0] != 0 {
             let separatorAttribute = UICollectionViewLayoutAttributes(forDecorationViewOfKind: separatorDecorationView,
                                                                       with: layoutAttribute.indexPath)
             let cellFrame = layoutAttribute.frame
@@ -41,5 +41,9 @@ class CustomFlowLayout: UICollectionViewFlowLayout {
         }
         
         return layoutAttributes + decorationAttributes
+    }
+    
+    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+        return true
     }
 }

@@ -15,9 +15,14 @@ class CalendarCollectionViewController: UICollectionViewController, UICollection
         let flowLayout = CustomFlowLayout()
         flowLayout.minimumInteritemSpacing = 0
         flowLayout.minimumLineSpacing = 1
+        // TODO - This is supposed to pin the header to the top while scrolling, but doesn't work
+        flowLayout.sectionHeadersPinToVisibleBounds = true
         super.init(collectionViewLayout: flowLayout)
         
         self.collectionView?.register(CalendarViewCell.self, forCellWithReuseIdentifier: CalendarViewCell.id)
+        self.collectionView?.register(WeekHeaderView.self,
+                                        forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
+                                        withReuseIdentifier: WeekHeaderView.id)
         self.collectionView?.isScrollEnabled = true
         self.collectionView?.backgroundColor = UIColor.clear
     }
@@ -54,6 +59,24 @@ class CalendarCollectionViewController: UICollectionViewController, UICollection
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        if section == 0 {
+            return CGSize(width: UIScreen.main.bounds.width, height: 54)
+        }
+        return CGSize.zero
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind ==  UICollectionElementKindSectionHeader {
+            let supplementaryView = collectionView.dequeueReusableSupplementaryView(
+                ofKind: UICollectionElementKindSectionHeader,
+                withReuseIdentifier: WeekHeaderView.id,
+                for: indexPath)
+            return supplementaryView
+        }
+        return UICollectionReusableView()
     }
 }
 

@@ -21,6 +21,7 @@
 		51EC07102070583600DB5084 /* AgendaTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EC070F2070583600DB5084 /* AgendaTableViewController.swift */; };
 		51EC07122070B6F100DB5084 /* SeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EC07112070B6F100DB5084 /* SeparatorView.swift */; };
 		51EC07142070B75A00DB5084 /* CustomFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EC07132070B75A00DB5084 /* CustomFlowLayout.swift */; };
+		51EC07162070BDC400DB5084 /* WeekHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EC07152070BDC400DB5084 /* WeekHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		51EC070F2070583600DB5084 /* AgendaTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaTableViewController.swift; sourceTree = "<group>"; };
 		51EC07112070B6F100DB5084 /* SeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorView.swift; sourceTree = "<group>"; };
 		51EC07132070B75A00DB5084 /* CustomFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFlowLayout.swift; sourceTree = "<group>"; };
+		51EC07152070BDC400DB5084 /* WeekHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +166,7 @@
 				51EC0708206F721200DB5084 /* CalendarViewCell.swift */,
 				51EC07112070B6F100DB5084 /* SeparatorView.swift */,
 				51EC07132070B75A00DB5084 /* CustomFlowLayout.swift */,
+				51EC07152070BDC400DB5084 /* WeekHeaderView.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				51EC06DB206F710800DB5084 /* OutlookCalendar.xcdatamodeld in Sources */,
+				51EC07162070BDC400DB5084 /* WeekHeaderView.swift in Sources */,
 				51EC06D5206F710800DB5084 /* ViewController.swift in Sources */,
 				51EC07122070B6F100DB5084 /* SeparatorView.swift in Sources */,
 				51EC07102070583600DB5084 /* AgendaTableViewController.swift in Sources */,
