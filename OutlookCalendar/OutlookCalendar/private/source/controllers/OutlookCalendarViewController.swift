@@ -10,21 +10,57 @@ import UIKit
 
 protocol CalendarDelegate: class {
     // Called when user selects a date in the calendar
-    func didCalendarSelectDate(data: String)
+    func didCalendarSelectDate(date: Date)
 }
 
 protocol AgendaDelegate: class {
     // Called when user starts scrolling in the agenda view
     func willAgendaViewBeginScroll()
     // Called when user scrolls to a date in the agenda view
-    func didScrollToDate(data: String)
+    func didScrollToDate(date: Date)
 }
 
 class OutlookCalendarViewController: UIViewController, CalendarDelegate, AgendaDelegate {
     
-    private var calendarVC = CalendarCollectionViewController()
-    private var agendaVC = AgendaTableViewController(style: .plain)
+    private var calendarVC: CalendarCollectionViewController
+    private var agendaVC: AgendaTableViewController
     
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        var dates: [Date] = []
+        // Assumption - We have server json data for 3 years starting 2017 ending 2019
+        var startDate = DateTimeUtil.dateFromValues(year: 2017, month: 1, day: 1)
+        var nextDate = startDate
+        var endDate = DateTimeUtil.dateFromValues(year: 2019, month: 12, day: 31)
+        // Create a list of dates from Jan 1 2017 to Dec 31 2019
+        while (nextDate.compare(endDate) != ComparisonResult.orderedSame) {
+            dates.append(nextDate)
+            nextDate = Calendar.current.date(byAdding: .day, value: 1, to: nextDate)!
+        }
+        // Jan 1 2017 could be a middle of the week day.  Populate the array from the previous Sunday
+        var startWeekDay = DateTimeUtil.weekdayFromDate(date: startDate)
+        while (startWeekDay > 1) {
+            let dateToInsert = Calendar.current.date(byAdding: .day, value: -1, to: startDate)!
+            dates.insert(dateToInsert, at: 0)
+            startDate = dateToInsert
+            startWeekDay -= 1
+        }
+        // Dec 31 2019 could be a middle of the week day.  Populate the array until the next Saturday
+        var endWeekDay = DateTimeUtil.weekdayFromDate(date: endDate)
+        while (endWeekDay < 7) {
+            let dateToInsert = Calendar.current.date(byAdding: .day, value: 1, to: endDate)!
+            dates.append(dateToInsert)
+            endDate = dateToInsert
+            endWeekDay += 1
+        }
+        self.calendarVC = CalendarCollectionViewController(dates: dates)
+        self.agendaVC = AgendaTableViewController(style: .plain, dates: dates)
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.translatesAutoresizingMaskIntoConstraints = false
@@ -54,9 +90,9 @@ class OutlookCalendarViewController: UIViewController, CalendarDelegate, AgendaD
         UXUtil.createBottomViewToTopViewConstraint(agendaVC.view, parent: self.view, topView: calendarVC.view, margin: 20)
     }
     
-    func didCalendarSelectDate(data: String) {
+    func didCalendarSelectDate(date: Date) {
         // User selected a date in calendar, inform AgendaVC, so that it can scroll to that date
-        self.agendaVC.selectDate(data: data)
+        self.agendaVC.selectDate(date: date)
     }
     
     func willAgendaViewBeginScroll() {
@@ -65,8 +101,8 @@ class OutlookCalendarViewController: UIViewController, CalendarDelegate, AgendaD
         self.calendarVC.didUserSelectInCalendar = false
     }
     
-    func didScrollToDate(data: String) {
+    func didScrollToDate(date: Date) {
         // User scrolled to a date in AgendaVC, inform CalendarVC, so that it can update it's selection
-        self.calendarVC.selectDate(data: data)
+        self.calendarVC.selectDate(date: date)
     }
 }

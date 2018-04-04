@@ -36,8 +36,8 @@ class CalendarViewCell: UICollectionViewCell {
         self.prepareForReuse()
     }
     
-    func setup(data: Int) {
-        self.label.text = String(data)
+    func setup(date: Date) {
+        self.label.text = String(DateTimeUtil.dayFromDate(date: date))
         self.label.textColor = UIColor.black
     }
     

@@ -36,8 +36,8 @@ class EventViewCell: UITableViewCell {
         self.prepareForReuse()
     }
     
-    func setup(data: String) {
-        self.label.text = data
+    func setup(event: EventInfo) {
+        self.label.text = event.title
         self.label.textColor = UIColor.black
     }
     

@@ -9,15 +9,41 @@
 import Foundation
 import UIKit
 
+class Datasource  {
+    let date: Date
+    let events: [EventInfo]
+    
+    init(date: Date, events: [EventInfo]) {
+        self.date = date
+        self.events = events
+    }
+}
+
 class AgendaTableViewController: UITableViewController {
     
     public weak var agendaDelegate: AgendaDelegate?
-    private var selectedDate: String = "1"
-    
-    override init(style: UITableViewStyle) {
+    private var selectedDate: Date
+    private var dates: [Date]
+    private var dataSource: [Datasource]
+    init(style: UITableViewStyle, dates: [Date]) {
+        self.dates = dates
+        // By default select user's current date (per local time zone)
+        self.selectedDate = DateTimeUtil.UTCToLocal(date: Date())
+        self.dataSource = []
         super.init(style: style)
+        self.setUpData()
     }
     
+    func setUpData() {
+        self.dates.forEach( { (date: Date) in
+            // TODO - Change this to take events for a specific date from core data after it is implemented
+            let event1 = EventInfo(title: "Meeting 1", description: "Scrum meeting")
+            let event2 = EventInfo(title: "Meeting 2", description: "Team meeting")
+            let events: [EventInfo] = [ event1, event2 ]
+            self.dataSource.append(Datasource(date: date, events: events))
+        })
+    }
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -37,21 +63,33 @@ class AgendaTableViewController: UITableViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 700
+        // Number of sections is the total number of dates
+        return self.dataSource.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        // Number of rows in a section is the number of events on a specific date
+        return self.dataSource[section].events.count
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return String(section + 1)
+        let formatter = DateFormatter()
+        let date = self.dataSource[section].date
+        let weekDay: String = formatter.weekdaySymbols[DateTimeUtil.weekdayFromDate(date: date) - 1]
+        let month: String = formatter.shortMonthSymbols[(DateTimeUtil.monthFromDate(date: date)) - 1]
+        let day: String = String(DateTimeUtil.dayFromDate(date: date))
+        var year: String = String(DateTimeUtil.yearFromDate(date: date))
+        // Display year only if it is not the current year
+        if (year == String(DateTimeUtil.currentYear())) {
+            year = ""
+        }
+        return weekDay + ", " + month + " " + day + (year != "" ? ", " + year : "")
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let data = "Dummy event"
+        let event: EventInfo = self.dataSource[indexPath[0]].events[indexPath[1]]
         let cell = tableView.dequeueReusableCell(withIdentifier: EventViewCell.id, for: indexPath)
-        (cell as? EventViewCell)?.setup(data: data)
+        (cell as? EventViewCell)?.setup(event: event)
         cell.backgroundColor = UIColor.white
         return cell
     }
@@ -65,18 +103,21 @@ class AgendaTableViewController: UITableViewController {
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if let delegate = self.agendaDelegate {
+            // As the user scrolls, take the first date that is visible
             if let indexPath = self.tableView.indexPathsForVisibleRows?.first {
                 // Inform the delegate that user scrolled to a date in AgendaVC
-                delegate.didScrollToDate(data: String(indexPath[0] + 1))
+                delegate.didScrollToDate(date: self.dataSource[indexPath[0]].date)
             }
         }
     }
     
-    func selectDate(data: String) {
-        self.selectedDate = data
+    func selectDate(date: Date) {
+        // This will be called when user selects a date in the calendar
+        // Scroll this view so that the selected date appears on top
+        self.selectedDate = date
         DispatchQueue.main.async {
-            if let secNumber = Int(self.selectedDate) {
-                let indexPath = IndexPath(item: 0, section: secNumber - 1)
+            if let secNumber = self.dates.index(of: date) {
+                let indexPath = IndexPath(item: 0, section: secNumber)
                 self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
             }
         }
