@@ -1,4 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="16G1036" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Attendee" representedClassName=".Attendee" syncable="YES">
+        <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="event" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="attendees" inverseEntity="Event" syncable="YES"/>
+        <relationship name="person" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="attendee" inverseEntity="Person" syncable="YES"/>
+    </entity>
+    <entity name="Event" representedClassName=".Event" syncable="YES">
+        <attribute name="eventDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eventDuration" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eventId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eventTimeLocal" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="eventTimeUTC" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eventTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="attendees" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Attendee" inverseName="event" inverseEntity="Attendee" syncable="YES"/>
+        <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="event" inverseEntity="Location" syncable="YES"/>
+        <relationship name="organizer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="event" inverseEntity="Person" syncable="YES"/>
+    </entity>
+    <entity name="Location" representedClassName=".Location" syncable="YES">
+        <attribute name="buildingNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="roomNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="event" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="location" inverseEntity="Event" syncable="YES"/>
+    </entity>
+    <entity name="Person" representedClassName=".Person" syncable="YES">
+        <attribute name="alias" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="attendee" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Attendee" inverseName="person" inverseEntity="Attendee" syncable="YES"/>
+        <relationship name="event" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="organizer" inverseEntity="Event" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Location" positionX="-27" positionY="18" width="128" height="88"/>
+        <element name="Person" positionX="180" positionY="-156" width="128" height="118"/>
+        <element name="Attendee" positionX="430" positionY="45" width="128" height="88"/>
+        <element name="Event" positionX="340" positionY="285" width="128" height="178"/>
+    </elements>
 </model>
