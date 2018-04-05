@@ -15,7 +15,7 @@ class ObjectStore: NSObject {
     static let sharedInstance = ObjectStore()
     private override init() {}
 
-    func eventEntityFrom(elementInfo: AnyObject) -> NSManagedObject? {
+    func createOrUpdateEventEntityFrom(elementInfo: AnyObject) -> NSManagedObject? {
         let context = CoreDataStack.sharedInstance.persistentContainer.viewContext
         // Get the id from json and check if we already have a location with that Id in our database
         guard let eventId = elementInfo["eventId"] as? String else { return nil }
@@ -24,7 +24,7 @@ class ObjectStore: NSObject {
             let fetchRequest : NSFetchRequest<Event> = Event.fetchRequest()
             fetchRequest.predicate = NSPredicate(format: "eventId == %@", eventId)
             let fetchedResults = try context.fetch(fetchRequest)
-            // If we have a location with that Id, reuse that object
+            // If we have an event with that Id, reuse that object
             if let anEvent = fetchedResults.first {
                 eventObject = anEvent
             }
@@ -33,22 +33,30 @@ class ObjectStore: NSObject {
             print ("fetch task failed", error)
         }
         if eventObject == nil {
-            // We didn't have that locationId in our database, create a new object
+            // We didn't have that eventId in our database, create a new object
             eventObject = NSEntityDescription.insertNewObject(forEntityName: "Event", into: context) as? Event
         }
         // Update the properties either way, details could've changed for the same location, assuming API keeps the id constant
         eventObject?.eventId = eventId
         eventObject?.eventTitle = elementInfo["eventTitle"] as? String
         eventObject?.eventDescription = elementInfo["eventDescription"] as? String
-        eventObject?.eventTimeUTC = elementInfo["eventTimeUTC"] as? String
+        eventObject?.eventDateTimeUTC = elementInfo["eventDateTimeUTC"] as? String
+        
+        // Convert the datetime from API from UTC to local time zone and save the date and time separately
+        // TODO: Bug - Convert UTC To local first
+        if let dateTimeArray = eventObject?.eventDateTimeUTC?.components(separatedBy: "T") {
+            eventObject?.eventDateLocal = dateTimeArray[0]
+            eventObject?.eventTimeLocal = dateTimeArray[1]
+        }
+        
         eventObject?.eventDuration = elementInfo["eventDuration"] as? String
-        let locationObject = locationEntityFrom(elementInfo: elementInfo) as? Location
+        let locationObject = createOrUpdateLocationEntityFrom(elementInfo: elementInfo) as? Location
         eventObject?.location = locationObject
         
         // Add attendees to the event
         if let attendeesElement = elementInfo["attendees"] as? [AnyObject] {
             for attendeeElement in attendeesElement {
-                if let attendeeObject = attendeeEntityFrom(elementInfo: attendeeElement) as? Attendee {
+                if let attendeeObject = createOrUpdateAttendeeEntityFrom(elementInfo: attendeeElement) as? Attendee {
                     eventObject?.addToAttendees(attendeeObject)
                 }
             }
@@ -56,7 +64,7 @@ class ObjectStore: NSObject {
         return eventObject
     }
     
-    func locationEntityFrom(elementInfo: AnyObject) -> NSManagedObject? {
+    func createOrUpdateLocationEntityFrom(elementInfo: AnyObject) -> NSManagedObject? {
         // Create a location object
         let context = CoreDataStack.sharedInstance.persistentContainer.viewContext
         // Json response for a location
@@ -87,7 +95,7 @@ class ObjectStore: NSObject {
         return locationObject
     }
     
-    func personEntityFrom(elementInfo: AnyObject) -> NSManagedObject? {
+    func createOrUpdatePersonEntityFrom(elementInfo: AnyObject) -> NSManagedObject? {
         // Create a person object
         let context = CoreDataStack.sharedInstance.persistentContainer.viewContext
         // Json response for a person
@@ -119,7 +127,7 @@ class ObjectStore: NSObject {
         return personObject
     }
     
-    func attendeeEntityFrom(elementInfo: AnyObject) -> NSManagedObject? {
+    func createOrUpdateAttendeeEntityFrom(elementInfo: AnyObject) -> NSManagedObject? {
         let context = CoreDataStack.sharedInstance.persistentContainer.viewContext
         guard let attendeeId = elementInfo["attendeeId"] as? String else { return nil }
         var attendeeObject: Attendee? = nil
@@ -141,11 +149,26 @@ class ObjectStore: NSObject {
         }
         
         // Update the properties either way, details could've changed for the same attendee, assuming API keeps the id constant
-        if let personObject = personEntityFrom(elementInfo: elementInfo) as? Person {
+        if let personObject = createOrUpdatePersonEntityFrom(elementInfo: elementInfo) as? Person {
             attendeeObject?.person = personObject
         }
         attendeeObject?.status = elementInfo["status"] as? String
         attendeeObject?.attendeeId = attendeeId
         return attendeeObject
+    }
+    
+    func fetchAllEventsOn(date: String) -> [Event]? {
+        let context = CoreDataStack.sharedInstance.persistentContainer.viewContext
+        do {
+            let fetchRequest : NSFetchRequest<Event> = Event.fetchRequest()
+            // TODO - Bug: Change this to eventTimeLocal once that field is populated
+            fetchRequest.predicate = NSPredicate(format: "eventDateLocal == %@", date)
+            let fetchedResults = try context.fetch(fetchRequest)
+            return fetchedResults.count > 0 ? fetchedResults : nil
+        }
+        catch {
+            print ("fetch task failed", error)
+        }
+        return nil
     }
 }

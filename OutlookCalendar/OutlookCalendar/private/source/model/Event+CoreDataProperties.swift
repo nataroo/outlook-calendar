@@ -20,9 +20,10 @@ extension Event {
     @NSManaged public var eventDescription: String?
     @NSManaged public var eventDuration: String?
     @NSManaged public var eventId: String?
-    @NSManaged public var eventTimeLocal: NSDate?
-    @NSManaged public var eventTimeUTC: String?
+    @NSManaged public var eventTimeLocal: String?
+    @NSManaged public var eventDateTimeUTC: String?
     @NSManaged public var eventTitle: String?
+    @NSManaged public var eventDateLocal: String?
     @NSManaged public var attendees: NSSet?
     @NSManaged public var location: Location?
 

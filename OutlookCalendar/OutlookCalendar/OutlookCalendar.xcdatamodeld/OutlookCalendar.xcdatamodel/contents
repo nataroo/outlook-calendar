@@ -7,11 +7,12 @@
         <relationship name="person" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="attendee" inverseEntity="Person" syncable="YES"/>
     </entity>
     <entity name="Event" representedClassName=".Event" syncable="YES">
+        <attribute name="eventDateLocal" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eventDateTimeUTC" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="eventDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="eventDuration" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="eventId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="eventTimeLocal" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="eventTimeUTC" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eventTimeLocal" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="eventTitle" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="attendees" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Attendee" inverseName="event" inverseEntity="Attendee" syncable="YES"/>
         <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="event" inverseEntity="Location" syncable="YES"/>
@@ -31,7 +32,7 @@
     </entity>
     <elements>
         <element name="Attendee" positionX="430" positionY="45" width="128" height="103"/>
-        <element name="Event" positionX="340" positionY="285" width="128" height="165"/>
+        <element name="Event" positionX="340" positionY="285" width="128" height="180"/>
         <element name="Location" positionX="-27" positionY="18" width="128" height="103"/>
         <element name="Person" positionX="180" positionY="-156" width="128" height="120"/>
     </elements>

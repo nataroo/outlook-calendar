@@ -1,8 +1,8 @@
 //
-//  EventViewCell.swift
+//  NoEventView.swift
 //  OutlookCalendar
 //
-//  Created by Roopa Natarajan on 4/1/18.
+//  Created by Roopa Natarajan on 4/5/18.
 //  Copyright © 2018 Microsoft. All rights reserved.
 //
 
@@ -11,8 +11,8 @@ import UIKit
 
 // Cell class for AgendaTableViewController
 
-class EventViewCell: UITableViewCell {
-    static let id = NSStringFromClass(EventViewCell.self)
+class NoEventView: UITableViewCell {
+    static let id = NSStringFromClass(NoEventView.self)
     
     private var label = UILabel()
     
@@ -36,8 +36,8 @@ class EventViewCell: UITableViewCell {
         self.prepareForReuse()
     }
     
-    func setup(event: Event) {
-        self.label.text = event.eventTitle
+    func setup() {
+        self.label.text = "No events"
         self.label.textColor = UIColor.black
     }
     

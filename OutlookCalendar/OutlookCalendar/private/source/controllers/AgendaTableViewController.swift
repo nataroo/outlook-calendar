@@ -11,9 +11,9 @@ import UIKit
 
 class Datasource  {
     let date: Date
-    let events: [EventInfo]
+    let events: [Event]
     
-    init(date: Date, events: [EventInfo]) {
+    init(date: Date, events: [Event]) {
         self.date = date
         self.events = events
     }
@@ -35,13 +35,24 @@ class AgendaTableViewController: UITableViewController {
     }
     
     func setUpData() {
+        var isDataAvailable = false
         self.dates.forEach( { (date: Date) in
-            // TODO - Change this to take events for a specific date from core data after it is implemented
-            let event1 = EventInfo(title: "Meeting 1", description: "Scrum meeting")
-            let event2 = EventInfo(title: "Meeting 2", description: "Team meeting")
-            let events: [EventInfo] = [ event1, event2 ]
-            self.dataSource.append(Datasource(date: date, events: events))
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            // Before making an API call, check if we have some data in core data model and display that to the user first
+            if let events = ObjectStore.sharedInstance.fetchAllEventsOn(date: formatter.string(from: date)) {
+                isDataAvailable = true
+                self.dataSource.append(Datasource(date: date, events: events))
+            } else {
+                // If there are no events for a given date, we still want to display the date
+                // so insert an empty Event array
+                self.dataSource.append(Datasource(date: date, events: [Event]()))
+            }
         })
+        // This might be the first time user is launching the app, so make the API call right away
+        if !isDataAvailable {
+            self.performAPICall()
+        }
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -60,8 +71,19 @@ class AgendaTableViewController: UITableViewController {
         self.tableView.estimatedSectionFooterHeight = 0
         // Register the event view cell
         self.tableView.register(EventViewCell.self, forCellReuseIdentifier: EventViewCell.id)
+        // Register the cell for displaying no events
+        self.tableView.register(NoEventView.self, forCellReuseIdentifier: NoEventView.id)
     }
-    
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // After loading the saved data from core data model, make an API call to update the model with any changes
+        // from the server and refresh the views
+        self.performAPICall()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
     override func numberOfSections(in tableView: UITableView) -> Int {
         // Number of sections is the total number of dates
         return self.dataSource.count
@@ -69,7 +91,8 @@ class AgendaTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Number of rows in a section is the number of events on a specific date
-        return self.dataSource[section].events.count
+        // If there are no events on a date, still return 1 row (we will display a 'no events' view)
+        return self.dataSource[section].events.count != 0 ? self.dataSource[section].events.count : 1
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -87,9 +110,19 @@ class AgendaTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let event: EventInfo = self.dataSource[indexPath[0]].events[indexPath[1]]
-        let cell = tableView.dequeueReusableCell(withIdentifier: EventViewCell.id, for: indexPath)
-        (cell as? EventViewCell)?.setup(event: event)
+        // Check if there are any events for the given date
+        let isNoEventView: Bool = self.dataSource[indexPath[0]].events.count == 0
+        // There are events, so display the event information
+        if !isNoEventView {
+            let event: Event = self.dataSource[indexPath[0]].events[indexPath[1]]
+            let cell = tableView.dequeueReusableCell(withIdentifier: EventViewCell.id, for: indexPath)
+            (cell as? EventViewCell)?.setup(event: event)
+            cell.backgroundColor = UIColor.white
+            return cell
+        }
+        // There are no events for that day, display 'no events'
+        let cell = tableView.dequeueReusableCell(withIdentifier: NoEventView.id, for: indexPath)
+        (cell as? NoEventView)?.setup()
         cell.backgroundColor = UIColor.white
         return cell
     }
@@ -120,6 +153,22 @@ class AgendaTableViewController: UITableViewController {
                 let indexPath = IndexPath(item: 0, section: secNumber)
                 self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
             }
+        }
+    }
+
+    // TODO - Bug: This method should probably have a completion handler so that the tableView knows when to refresh itself
+    func performAPICall() {
+        // Assumption: Make an API call here and assume the response is stored in array
+        let array = JsonParser.JSONParseArray()
+        for elementInfo in array! {
+            // Map the json response to the core data model
+            _ = ObjectStore.sharedInstance.createOrUpdateEventEntityFrom(elementInfo: elementInfo)
+        }
+        do {
+            // Save the data
+            try CoreDataStack.sharedInstance.persistentContainer.viewContext.save()
+        } catch let error {
+            print(error)
         }
     }
 }

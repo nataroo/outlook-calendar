@@ -55,15 +55,6 @@ class OutlookCalendarViewController: UIViewController, CalendarDelegate, AgendaD
         self.calendarVC = CalendarCollectionViewController(dates: dates)
         self.agendaVC = AgendaTableViewController(style: .plain, dates: dates)
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        let array = JsonParser.JSONParseArray()
-        for elementInfo in array! {
-            _ = ObjectStore.sharedInstance.eventEntityFrom(elementInfo: elementInfo)
-        }
-        do {
-            try CoreDataStack.sharedInstance.persistentContainer.viewContext.save()
-        } catch let error {
-            print(error)
-        }
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -98,7 +89,7 @@ class OutlookCalendarViewController: UIViewController, CalendarDelegate, AgendaD
         // CalendarVC.bottom = AgendaVC.top
         UXUtil.createBottomViewToTopViewConstraint(agendaVC.view, parent: self.view, topView: calendarVC.view, margin: 20)
     }
-    
+
     func didCalendarSelectDate(date: Date) {
         // User selected a date in calendar, inform AgendaVC, so that it can scroll to that date
         self.agendaVC.selectDate(date: date)

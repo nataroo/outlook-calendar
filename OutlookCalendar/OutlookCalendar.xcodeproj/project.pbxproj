@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		510163E82076ABA3008FC659 /* NoEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510163E72076ABA3008FC659 /* NoEventView.swift */; };
+		513A2AEA2076A4A800501DC4 /* Event+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513A2AE92076A4A800501DC4 /* Event+CoreDataProperties.swift */; };
 		514FD6DF2075FCA600066EA2 /* Organizer+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514FD6DD2075FCA600066EA2 /* Organizer+CoreDataClass.swift */; };
 		514FD6E520760C3900066EA2 /* Attendee+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514FD6E120760C3900066EA2 /* Attendee+CoreDataProperties.swift */; };
-		514FD6E620760C3900066EA2 /* Event+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514FD6E220760C3900066EA2 /* Event+CoreDataProperties.swift */; };
 		514FD6E720760C3900066EA2 /* Location+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514FD6E320760C3900066EA2 /* Location+CoreDataProperties.swift */; };
 		514FD6E820760C3900066EA2 /* Person+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514FD6E420760C3900066EA2 /* Person+CoreDataProperties.swift */; };
 		51EC06D3206F710800DB5084 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EC06D2206F710800DB5084 /* AppDelegate.swift */; };
@@ -29,7 +30,6 @@
 		51EC071A2072107D00DB5084 /* OutlookCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EC07192072107D00DB5084 /* OutlookCalendarViewController.swift */; };
 		51EC071C20724AD000DB5084 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EC071B20724AD000DB5084 /* MainViewController.swift */; };
 		51EC071E20735E6000DB5084 /* DateTimeUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EC071D20735E6000DB5084 /* DateTimeUtil.swift */; };
-		51EC072120746DD300DB5084 /* EventInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EC072020746DD300DB5084 /* EventInfo.swift */; };
 		51EC073820758B4300DB5084 /* Location+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EC073620758B4300DB5084 /* Location+CoreDataClass.swift */; };
 		51EC073C20758B6900DB5084 /* Person+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EC073A20758B6900DB5084 /* Person+CoreDataClass.swift */; };
 		51EC074020758B8A00DB5084 /* Attendee+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EC073E20758B8A00DB5084 /* Attendee+CoreDataClass.swift */; };
@@ -57,9 +57,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		510163E72076ABA3008FC659 /* NoEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoEventView.swift; sourceTree = "<group>"; };
+		513A2AE92076A4A800501DC4 /* Event+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Event+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		514FD6DD2075FCA600066EA2 /* Organizer+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Organizer+CoreDataClass.swift"; sourceTree = "<group>"; };
 		514FD6E120760C3900066EA2 /* Attendee+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Attendee+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		514FD6E220760C3900066EA2 /* Event+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Event+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		514FD6E320760C3900066EA2 /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		514FD6E420760C3900066EA2 /* Person+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		51EC06CF206F710800DB5084 /* OutlookCalendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OutlookCalendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,7 +86,6 @@
 		51EC07192072107D00DB5084 /* OutlookCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlookCalendarViewController.swift; sourceTree = "<group>"; };
 		51EC071B20724AD000DB5084 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		51EC071D20735E6000DB5084 /* DateTimeUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeUtil.swift; sourceTree = "<group>"; };
-		51EC072020746DD300DB5084 /* EventInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInfo.swift; sourceTree = "<group>"; };
 		51EC073620758B4300DB5084 /* Location+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataClass.swift"; sourceTree = "<group>"; };
 		51EC073A20758B6900DB5084 /* Person+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataClass.swift"; sourceTree = "<group>"; };
 		51EC073E20758B8A00DB5084 /* Attendee+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Attendee+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -198,6 +198,7 @@
 				51EC07132070B75A00DB5084 /* CustomFlowLayout.swift */,
 				51EC07152070BDC400DB5084 /* WeekHeaderView.swift */,
 				51EC07172072082000DB5084 /* EventViewCell.swift */,
+				510163E72076ABA3008FC659 /* NoEventView.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -225,8 +226,8 @@
 		51EC071F20746DC100DB5084 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				513A2AE92076A4A800501DC4 /* Event+CoreDataProperties.swift */,
 				514FD6E120760C3900066EA2 /* Attendee+CoreDataProperties.swift */,
-				514FD6E220760C3900066EA2 /* Event+CoreDataProperties.swift */,
 				514FD6E320760C3900066EA2 /* Location+CoreDataProperties.swift */,
 				514FD6E420760C3900066EA2 /* Person+CoreDataProperties.swift */,
 				514FD6DD2075FCA600066EA2 /* Organizer+CoreDataClass.swift */,
@@ -234,7 +235,6 @@
 				51EC073E20758B8A00DB5084 /* Attendee+CoreDataClass.swift */,
 				51EC073A20758B6900DB5084 /* Person+CoreDataClass.swift */,
 				51EC073620758B4300DB5084 /* Location+CoreDataClass.swift */,
-				51EC072020746DD300DB5084 /* EventInfo.swift */,
 				51EC074A2075911D00DB5084 /* CoreDataStack.swift */,
 				51EC074E2075C93300DB5084 /* JsonParser.swift */,
 				51EC07582075EBBA00DB5084 /* ObjectStore.swift */,
@@ -380,14 +380,14 @@
 				51EC06DB206F710800DB5084 /* OutlookCalendar.xcdatamodeld in Sources */,
 				51EC074F2075C93300DB5084 /* JsonParser.swift in Sources */,
 				51EC07162070BDC400DB5084 /* WeekHeaderView.swift in Sources */,
+				513A2AEA2076A4A800501DC4 /* Event+CoreDataProperties.swift in Sources */,
 				51EC07182072082000DB5084 /* EventViewCell.swift in Sources */,
-				514FD6E620760C3900066EA2 /* Event+CoreDataProperties.swift in Sources */,
 				51EC073820758B4300DB5084 /* Location+CoreDataClass.swift in Sources */,
 				51EC071C20724AD000DB5084 /* MainViewController.swift in Sources */,
 				51EC071A2072107D00DB5084 /* OutlookCalendarViewController.swift in Sources */,
+				510163E82076ABA3008FC659 /* NoEventView.swift in Sources */,
 				514FD6E820760C3900066EA2 /* Person+CoreDataProperties.swift in Sources */,
 				51EC07122070B6F100DB5084 /* SeparatorView.swift in Sources */,
-				51EC072120746DD300DB5084 /* EventInfo.swift in Sources */,
 				51EC07102070583600DB5084 /* AgendaTableViewController.swift in Sources */,
 				514FD6DF2075FCA600066EA2 /* Organizer+CoreDataClass.swift in Sources */,
 				514FD6E720760C3900066EA2 /* Location+CoreDataProperties.swift in Sources */,
