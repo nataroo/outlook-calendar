@@ -1,4 +1,3 @@
-//
 //  ObjectStore.swift
 //  OutlookCalendar
 //

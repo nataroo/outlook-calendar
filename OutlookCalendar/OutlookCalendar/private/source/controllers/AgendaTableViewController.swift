@@ -25,23 +25,22 @@ class AgendaTableViewController: UITableViewController {
     private var selectedDate: Date
     private var dates: [Date]
     private var dataSource: [Datasource]
+    
     init(style: UITableViewStyle, dates: [Date]) {
         self.dates = dates
         // By default select user's current date (per local time zone)
         self.selectedDate = DateTimeUtil.UTCToLocal(date: Date())
         self.dataSource = []
         super.init(style: style)
-        self.setUpData()
     }
     
     func setUpData() {
-        var isDataAvailable = false
+        self.dataSource.removeAll()
         self.dates.forEach( { (date: Date) in
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-MM-dd"
             // Before making an API call, check if we have some data in core data model and display that to the user first
             if let events = ObjectStore.sharedInstance.fetchAllEventsOn(date: formatter.string(from: date)) {
-                isDataAvailable = true
                 self.dataSource.append(Datasource(date: date, events: events))
             } else {
                 // If there are no events for a given date, we still want to display the date
@@ -49,10 +48,6 @@ class AgendaTableViewController: UITableViewController {
                 self.dataSource.append(Datasource(date: date, events: [Event]()))
             }
         })
-        // This might be the first time user is launching the app, so make the API call right away
-        if !isDataAvailable {
-            self.performAPICall()
-        }
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -61,6 +56,7 @@ class AgendaTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setUpData()
         self.tableView.bounces = false
         self.tableView.showsHorizontalScrollIndicator = false
         self.tableView.showsVerticalScrollIndicator = false
@@ -79,11 +75,16 @@ class AgendaTableViewController: UITableViewController {
         super.viewDidAppear(animated)
         // After loading the saved data from core data model, make an API call to update the model with any changes
         // from the server and refresh the views
-        self.performAPICall()
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
+        self.performAPICall(completion: {
+            // API call has been made and data saved to core data
+            // Use that data for this view and refresh the view
+            self.setUpData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        })
     }
+
     override func numberOfSections(in tableView: UITableView) -> Int {
         // Number of sections is the total number of dates
         return self.dataSource.count
@@ -156,8 +157,7 @@ class AgendaTableViewController: UITableViewController {
         }
     }
 
-    // TODO - Bug: This method should probably have a completion handler so that the tableView knows when to refresh itself
-    func performAPICall() {
+    func performAPICall(completion: (() -> Swift.Void)? = nil) {
         // Assumption: Make an API call here and assume the response is stored in array
         let array = JsonParser.JSONParseArray()
         for elementInfo in array! {
@@ -167,6 +167,10 @@ class AgendaTableViewController: UITableViewController {
         do {
             // Save the data
             try CoreDataStack.sharedInstance.persistentContainer.viewContext.save()
+            // Data has been saved to CoreData, inform the caller in case they want to refresh the UX
+            if let completion = completion {
+                completion()
+            }
         } catch let error {
             print(error)
         }
