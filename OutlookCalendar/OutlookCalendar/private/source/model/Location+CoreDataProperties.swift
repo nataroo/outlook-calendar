@@ -19,6 +19,7 @@ extension Location {
 
     @NSManaged public var buildingNumber: String?
     @NSManaged public var roomNumber: String?
+    @NSManaged public var locationId: String?
     @NSManaged public var event: Event?
 
 }

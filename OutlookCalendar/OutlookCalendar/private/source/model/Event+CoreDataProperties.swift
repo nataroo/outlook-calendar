@@ -24,8 +24,8 @@ extension Event {
     @NSManaged public var eventDuration: String?
     @NSManaged public var eventId: String?
     @NSManaged public var location: Location?
-    @NSManaged public var organizer: Person?
     @NSManaged public var attendees: NSSet?
+    @NSManaged public var organizer: Organizer?
 
 }
 

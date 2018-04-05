@@ -55,4 +55,10 @@ class CoreDataStack: NSObject {
             }
         }
     }
+
+    func applicationDocumentsDirectory() {
+        if let url = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).last {
+            print(url.absoluteString)
+        }
+    }
 }

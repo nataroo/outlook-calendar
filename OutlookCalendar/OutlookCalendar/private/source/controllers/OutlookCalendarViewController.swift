@@ -55,6 +55,15 @@ class OutlookCalendarViewController: UIViewController, CalendarDelegate, AgendaD
         self.calendarVC = CalendarCollectionViewController(dates: dates)
         self.agendaVC = AgendaTableViewController(style: .plain, dates: dates)
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        let array = JsonParser.JSONParseArray()
+        for elementInfo in array! {
+            _ = ObjectStore.sharedInstance.eventEntityFrom(elementInfo: elementInfo)
+        }
+        do {
+            try CoreDataStack.sharedInstance.persistentContainer.viewContext.save()
+        } catch let error {
+            print(error)
+        }
     }
 
     required init?(coder aDecoder: NSCoder) {

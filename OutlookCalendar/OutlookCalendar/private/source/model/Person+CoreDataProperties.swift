@@ -20,7 +20,8 @@ extension Person {
     @NSManaged public var firstName: String?
     @NSManaged public var lastName: String?
     @NSManaged public var alias: String?
+    @NSManaged public var personId: String?
     @NSManaged public var attendee: Attendee?
-    @NSManaged public var event: Event?
+    @NSManaged public var organizer: Organizer?
 
 }

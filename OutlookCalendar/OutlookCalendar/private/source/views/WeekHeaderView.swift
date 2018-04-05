@@ -50,7 +50,7 @@ class WeekHeaderView: UICollectionReusableView {
         separatorView.translatesAutoresizingMaskIntoConstraints = false
         separatorView.backgroundColor = UIColor.lightGray
         self.addSubview(separatorView)
-        UXUtil.createHeightConstraint(separatorView, height: 1)
+        _ = UXUtil.createHeightConstraint(separatorView, height: 1)
         UXUtil.createHorizontalConstraints(separatorView, outerView: self, margin: 0)
         UXUtil.createBottomViewToTopViewConstraint(separatorView, parent: self, topView: stackView, margin: 0)
         UXUtil.createConstraint(separatorView, parent: self, to: self, constraint: .bottom, margin: 0)

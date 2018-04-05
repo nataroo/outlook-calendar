@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationController.navigationBar.isTranslucent = false
         self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()
+        CoreDataStack.sharedInstance.applicationDocumentsDirectory()
         return true
     }
 

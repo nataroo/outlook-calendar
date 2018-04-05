@@ -18,6 +18,7 @@ extension Attendee {
     }
 
     @NSManaged public var status: String?
+    @NSManaged public var attendeeId: String?
     @NSManaged public var person: Person?
     @NSManaged public var event: Event?
 
