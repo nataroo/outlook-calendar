@@ -2,7 +2,7 @@
 //  Event+CoreDataProperties.swift
 //  OutlookCalendar
 //
-//  Created by Roopa Natarajan on 4/4/18.
+//  Created by Roopa Natarajan on 4/5/18.
 //  Copyright © 2018 Microsoft. All rights reserved.
 //
 //
@@ -17,15 +17,14 @@ extension Event {
         return NSFetchRequest<Event>(entityName: "Event")
     }
 
-    @NSManaged public var eventTitle: String?
     @NSManaged public var eventDescription: String?
-    @NSManaged public var eventTimeUTC: String?
-    @NSManaged public var eventTimeLocal: NSDate?
     @NSManaged public var eventDuration: String?
     @NSManaged public var eventId: String?
-    @NSManaged public var location: Location?
+    @NSManaged public var eventTimeLocal: NSDate?
+    @NSManaged public var eventTimeUTC: String?
+    @NSManaged public var eventTitle: String?
     @NSManaged public var attendees: NSSet?
-    @NSManaged public var organizer: Organizer?
+    @NSManaged public var location: Location?
 
 }
 
