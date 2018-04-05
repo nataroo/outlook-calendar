@@ -8,6 +8,23 @@
 import CoreData
 import Foundation
 
+/*
+ 
+There are two approches to updating the Core Data table to avoid duplicates
+ a. Everytime an API call is made, delete all entries from the core data model and recreate from json response
+ b. Whenever an entity object is created, query the core data model for that entity type using a unique id.  If
+    that entity is already available, update it's properties based on json response, otherwise create a new one
+ 
+I have followed option b here.  Drawback with this is, if API deletes some entities in its response the next time, we will
+never delete those entity objects from the core data model.  To achieve this, we might have to set a flag on each
+object during the API update and delete the ones which were never touched.  Or we could have a contract from the service,
+to send the deletion info along with the json response.  Like a 404 not found for that specific id.  But it might not
+be scalable for the API to keep sending this for a long time, so ultimately the client has to delete the objects which
+are not present in the server response.  I have not done this delete implementation since my data is static and the json
+response is always the same
+ 
+ */
+
 class ObjectStore: NSObject {
     
     // Singleton
