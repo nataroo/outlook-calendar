@@ -22,9 +22,7 @@ class CalendarCollectionViewController: UICollectionViewController, UICollection
     
     init(dates: [Date]) {
         self.dates = dates
-        // By default select user's current date (per local time zone)
-        // TODO: Bug - This is not converting to local time
-        self.selectedDate = DateTimeUtil.UTCToLocal(date: Date())
+        self.selectedDate = Calendar.current.startOfDay(for: Date())
         // Create a custom flow layout since we need separators drawn as decorator views
         let flowLayout = CustomFlowLayout()
         flowLayout.minimumInteritemSpacing = 0
@@ -47,6 +45,16 @@ class CalendarCollectionViewController: UICollectionViewController, UICollection
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if let indexPath = self.indexPathInDatasource(of: self.selectedDate) {
+            self.collectionView?.selectItem(at: indexPath, animated: false, scrollPosition: .centeredVertically)
+            if let delegate = self.calendarDelegate {
+                delegate.didCalendarSelectDate(date: self.selectedDate)
+            }
+        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -148,18 +156,21 @@ class CalendarCollectionViewController: UICollectionViewController, UICollection
         // Make sure this is not a user action in calendarVC, but a user action in AgendaVC, otherwise we will get into
         // a scroll feedback loop
         if self.didUserSelectInCalendar == false {
-            if let (row, col) = self.indicesInDatasource(of: date) {
+            if let indexPath = self.indexPathInDatasource(of: date) {
                 DispatchQueue.main.async {
-                    self.collectionView?.scrollToItem(at: IndexPath(item: col, section: row), at: UICollectionViewScrollPosition.centeredVertically, animated: true)
+                    self.collectionView?.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.centeredVertically, animated: true)
                     self.collectionView?.reloadData()
                 }
             }
         }
     }
     
-    func indicesInDatasource(of date: Date) -> (Int, Int)? {
+    func indexPathInDatasource(of date: Date) -> IndexPath? {
         if let index = self.dates.index(of: date) {
-            return (index / 7, index % 7)
+            var indexPath = IndexPath()
+            indexPath.append(index / 7)
+            indexPath.append(index % 7)
+            return indexPath
         }
         return nil
     }

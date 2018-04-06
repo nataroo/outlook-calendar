@@ -13,25 +13,14 @@ class DateTimeUtil {
     
     static var calendar = Calendar.current
     
-    // Util to convert UTC date time to user's local time zone date time
-    static func UTCToLocal(date: Date) -> Date {
-        var dateComponents = DateComponents()
-        dateComponents.year = yearFromDate(date: date)
-        dateComponents.month = monthFromDate(date: date)
-        dateComponents.day = dayFromDate(date: date)
-        dateComponents.hour = hourFromDate(date: date)
-        dateComponents.minute = minuteFromDate(date: date)
-        dateComponents.second = secondFromDate(date: date)
-
-        dateComponents.timeZone = TimeZone.current
-        return calendar.date(from: dateComponents)!
-    }
-    
-    static func dateFromValues(year: Int, month: Int, day: Int) -> Date {
+    static func dateFromValues(year: Int, month: Int, day: Int, hour: Int, minute: Int, second: Int) -> Date {
         var dateComponents = DateComponents()
         dateComponents.year = year
         dateComponents.month = month
         dateComponents.day = day
+        dateComponents.hour = hour
+        dateComponents.minute = minute
+        dateComponents.second = second
         return calendar.date(from: dateComponents)!
     }
     
@@ -64,13 +53,11 @@ class DateTimeUtil {
     }
     
     static func currentYear() -> Int {
-        let date: Date = UTCToLocal(date: Date())
-        return yearFromDate(date: date)
+        return yearFromDate(date: Date())
     }
     
     static func currentMonth() -> Int {
-        let date: Date = UTCToLocal(date: Date())
-        return monthFromDate(date: date)
+        return monthFromDate(date: Date())
     }
     
     static func numberOfWeekDays() -> Int {

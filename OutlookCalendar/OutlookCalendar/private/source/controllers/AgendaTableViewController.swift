@@ -28,8 +28,7 @@ class AgendaTableViewController: UITableViewController {
     
     init(style: UITableViewStyle, dates: [Date]) {
         self.dates = dates
-        // By default select user's current date (per local time zone)
-        self.selectedDate = DateTimeUtil.UTCToLocal(date: Date())
+        self.selectedDate = Calendar.current.startOfDay(for: Date())
         self.dataSource = []
         super.init(style: style)
     }

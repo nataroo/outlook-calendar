@@ -28,9 +28,9 @@ class OutlookCalendarViewController: UIViewController, CalendarDelegate, AgendaD
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         var dates: [Date] = []
         // Assumption - We have server json data for 3 years starting 2017 ending 2019
-        var startDate = DateTimeUtil.dateFromValues(year: 2017, month: 1, day: 1)
+        var startDate = DateTimeUtil.dateFromValues(year: 2017, month: 1, day: 1, hour: 0, minute: 0, second: 0)
         var nextDate = startDate
-        var endDate = DateTimeUtil.dateFromValues(year: 2019, month: 12, day: 31)
+        var endDate = DateTimeUtil.dateFromValues(year: 2019, month: 12, day: 31, hour: 0, minute: 0, second: 0)
         // Create a list of dates from Jan 1 2017 to Dec 31 2019
         while (nextDate.compare(endDate) != ComparisonResult.orderedSame) {
             dates.append(nextDate)
