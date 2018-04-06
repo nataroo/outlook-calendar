@@ -62,7 +62,7 @@ class AgendaTableViewController: UITableViewController {
         self.tableView.showsVerticalScrollIndicator = false
         self.tableView.isScrollEnabled = true
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.singleLine
-        self.tableView.estimatedRowHeight = 60
+        self.tableView.estimatedRowHeight = 200
         self.tableView.estimatedSectionHeaderHeight = 20
         self.tableView.estimatedSectionFooterHeight = 0
         // Register the event view cell
@@ -96,6 +96,11 @@ class AgendaTableViewController: UITableViewController {
         return self.dataSource[section].events.count != 0 ? self.dataSource[section].events.count : 1
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let isNoEventView: Bool = self.dataSource[indexPath[0]].events.count == 0
+        return isNoEventView ? 40 : 80
+    }
+    
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let formatter = DateFormatter()
         let date = self.dataSource[section].date
@@ -117,12 +122,14 @@ class AgendaTableViewController: UITableViewController {
         if !isNoEventView {
             let event: Event = self.dataSource[indexPath[0]].events[indexPath[1]]
             let cell = tableView.dequeueReusableCell(withIdentifier: EventViewCell.id, for: indexPath)
+//            cell.translatesAutoresizingMaskIntoConstraints = false
             (cell as? EventViewCell)?.setup(event: event)
             cell.backgroundColor = UIColor.white
             return cell
         }
         // There are no events for that day, display 'no events'
         let cell = tableView.dequeueReusableCell(withIdentifier: NoEventView.id, for: indexPath)
+//        cell.translatesAutoresizingMaskIntoConstraints = false
         (cell as? NoEventView)?.setup()
         cell.backgroundColor = UIColor.white
         return cell

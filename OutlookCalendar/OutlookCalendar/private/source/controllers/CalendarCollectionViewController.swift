@@ -122,6 +122,9 @@ class CalendarCollectionViewController: UICollectionViewController, UICollection
         self.expandOrCollapse(height: 300)
     }
     
+    // TODO: override scrollViewDidScroll method and track the current month being shown in the calendar
+    // based on indexPathsOfVisibleCells.  Set the navigation bar's title accordingly
+    
     public func expandOrCollapse(height: CGFloat) {
         // Expand or collapse the calendar collection view depending on height
         DispatchQueue.main.async {

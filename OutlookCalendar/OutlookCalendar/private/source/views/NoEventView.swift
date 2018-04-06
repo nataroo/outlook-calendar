@@ -29,9 +29,9 @@ class NoEventView: UITableViewCell {
     func setupLayout() {
         self.addSubview(self.label)
         self.label.frame = self.frame
-        UXUtil.createHorizontalConstraints(label, outerView: self, margin: 0)
+        UXUtil.createHorizontalConstraints(label, outerView: self, margin: 16)
         UXUtil.createVerticalConstraints(label, outerView: self, margin: 0)
-        self.label.textAlignment = NSTextAlignment.center
+        self.label.textAlignment = NSTextAlignment.left
         self.label.translatesAutoresizingMaskIntoConstraints = false
         self.prepareForReuse()
     }
