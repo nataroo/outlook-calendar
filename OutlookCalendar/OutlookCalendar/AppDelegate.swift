@@ -21,6 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // navigationController's first screen would be mainViewController
         let navigationController = UINavigationController(rootViewController: mainViewController)
         navigationController.navigationBar.isTranslucent = false
+        let barAppearance = UINavigationBar.appearance()
+        barAppearance.barTintColor = UIColor.white
+        barAppearance.tintColor = UIColor.black
+        barAppearance.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.black]
         self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()
         CoreDataStack.sharedInstance.applicationDocumentsDirectory()

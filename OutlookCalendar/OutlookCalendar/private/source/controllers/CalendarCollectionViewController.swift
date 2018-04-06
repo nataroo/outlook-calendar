@@ -16,13 +16,19 @@ class CalendarCollectionViewController: UICollectionViewController, UICollection
     // Flag used to avoid a feedback loop in scrolling (differentiates between a user action
     // and a programmatic action)
     public var didUserSelectInCalendar: Bool?
+    // Date that the user has selected in the calendar currently
     private var selectedDate: Date
+    // Month and year that the user is scrolling through currently (without selecting)
+    private var scrollingMonth: Int
+    private var scrollingYear: Int
     private var dates: [Date]
     private var numberOfWeekDays = DateTimeUtil.numberOfWeekDays()
     
     init(dates: [Date]) {
         self.dates = dates
         self.selectedDate = Calendar.current.startOfDay(for: Date())
+        self.scrollingYear = DateTimeUtil.yearFromDate(date: self.selectedDate)
+        self.scrollingMonth = DateTimeUtil.monthFromDate(date: self.selectedDate)
         // Create a custom flow layout since we need separators drawn as decorator views
         let flowLayout = CustomFlowLayout()
         flowLayout.minimumInteritemSpacing = 0
@@ -54,6 +60,7 @@ class CalendarCollectionViewController: UICollectionViewController, UICollection
             if let delegate = self.calendarDelegate {
                 delegate.didCalendarSelectDate(date: self.selectedDate)
             }
+            self.changeNavigationBarTitle(date: self.selectedDate)
         }
     }
     
@@ -130,6 +137,16 @@ class CalendarCollectionViewController: UICollectionViewController, UICollection
         self.expandOrCollapse(height: 300)
     }
     
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // As user scrolls thru the calendar, take the currently visible middle date and find out which
+        // month and year it belongs to
+        if let indexPaths = self.collectionView?.indexPathsForVisibleItems {
+            let indexPath = indexPaths[indexPaths.count / 2]
+            let date = self.dates[indexPath[0] * self.numberOfWeekDays + indexPath[1]]
+            self.changeNavigationBarTitle(date: date)
+        }
+    }
+
     // TODO: override scrollViewDidScroll method and track the current month being shown in the calendar
     // based on indexPathsOfVisibleCells.  Set the navigation bar's title accordingly
     
@@ -175,5 +192,25 @@ class CalendarCollectionViewController: UICollectionViewController, UICollection
         return nil
     }
 
+    func changeNavigationBarTitle(date: Date) {
+        let month = DateTimeUtil.monthFromDate(date: date)
+        let year = DateTimeUtil.yearFromDate(date: date)
+        // Change the nav bar title only if it is different from what is displayed currently
+        var shouldChangeTitle = false
+        if month != self.scrollingMonth {
+            self.scrollingMonth = month
+            shouldChangeTitle = true
+        }
+        if year != self.scrollingYear {
+            self.scrollingYear = year
+            shouldChangeTitle = true
+        }
+        if shouldChangeTitle {
+            let monthStr = Calendar.current.monthSymbols[self.scrollingMonth - 1]
+            // Display year only if it is not the current year
+            let shouldDisplayYear = self.scrollingYear != DateTimeUtil.currentYear()
+            (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController?.title = monthStr + (shouldDisplayYear ? " " + String(self.scrollingYear) : "")
+        }
+    }
 }
 
