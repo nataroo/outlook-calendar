@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // navigationController's first screen would be mainViewController
         let navigationController = UINavigationController(rootViewController: mainViewController)
         navigationController.navigationBar.isTranslucent = false
+        navigationController.navigationBar.accessibilityIdentifier = "Navigation-Bar"
         let barAppearance = UINavigationBar.appearance()
         barAppearance.barTintColor = UIColor.white
         barAppearance.tintColor = UIColor.black
@@ -55,5 +56,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         CoreDataStack.sharedInstance.saveContext()
     }
 
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        return .portrait
+    }
 }
 

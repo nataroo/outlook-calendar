@@ -31,6 +31,8 @@ class AgendaTableViewController: UITableViewController {
         self.selectedDate = Calendar.current.startOfDay(for: Date())
         self.dataSource = []
         super.init(style: style)
+        // TODO - Move this to a constants view so it can be used in tests
+        self.tableView.accessibilityIdentifier = "Agenda-View"
     }
     
     func setUpData() {

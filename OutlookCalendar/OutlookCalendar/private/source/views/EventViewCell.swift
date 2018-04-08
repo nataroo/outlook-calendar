@@ -27,6 +27,7 @@ class EventViewCell: UITableViewCell {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        self.isAccessibilityElement = true
         self.setupLayout()
     }
     
@@ -109,6 +110,10 @@ class EventViewCell: UITableViewCell {
         }
         self.attendeesLabel.text = attendeesString
         self.attendeesLabel.textColor = UIColor.darkText
+        // For UI tests
+        if event.eventDateLocal == "2018-03-29" {
+            self.accessibilityIdentifier = "Mar-29-Test-TableCell"
+        }
     }
     
     override func prepareForReuse() {

@@ -46,7 +46,10 @@ class CalendarCollectionViewController: UICollectionViewController, UICollection
         self.collectionView?.isScrollEnabled = true
         self.collectionView?.backgroundColor = UIColor.clear
         // Set height constraint for the collection view
+        // TODO - Put these into a constants file, so it could also be used in test files
         self.heightConstraint = UXUtil.createHeightConstraint(self.view, height: 150)
+        // TODO - Move this to a constants file to be used by test
+        self.collectionView?.accessibilityIdentifier = "Calendar-View"
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -192,6 +195,12 @@ class CalendarCollectionViewController: UICollectionViewController, UICollection
         return nil
     }
 
+    // TODO - Currently I am changing the navigation bar's title whenever user scrolls thru the calendar
+    // without selecting any date.  This might be confusing because the calendar could display dates from
+    // two months at the same time (25 to 30 of a month and 1 to 25 of the next one).  I am choosing the
+    // middle row's date right now.  What would be ideal is to change the title only when the user selects
+    // a date.  But show the currently scrolling date within the calendar itself as an overlay (like how
+    // Outlook calendar does it currently)
     func changeNavigationBarTitle(date: Date) {
         let month = DateTimeUtil.monthFromDate(date: date)
         let year = DateTimeUtil.yearFromDate(date: date)

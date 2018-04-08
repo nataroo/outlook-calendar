@@ -19,5 +19,6 @@ class MainViewController: UIViewController {
         // Align outlookCalendarVC to mainVC vertically and horizontally
         UXUtil.createVerticalConstraints(outlookCalendarVC.view, outerView: self.view, margin: 0)
         UXUtil.createHorizontalConstraints(outlookCalendarVC.view, outerView: self.view, margin: 0)
+        self.view.accessibilityIdentifier = "Main-Controller"
     }
 }

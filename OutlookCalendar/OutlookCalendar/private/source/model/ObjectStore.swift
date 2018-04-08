@@ -10,7 +10,7 @@ import Foundation
 
 /*
  
-There are two approches to updating the Core Data table to avoid duplicates
+TODO - There are two approches to updating the Core Data table to avoid duplicates
  a. Everytime an API call is made, delete all entries from the core data model and recreate from json response
  b. Whenever an entity object is created, query the core data model for that entity type using a unique id.  If
     that entity is already available, update it's properties based on json response, otherwise create a new one
@@ -187,4 +187,19 @@ class ObjectStore: NSObject {
         }
         return nil
     }
+    
+    func fetchEventWithId(id: String) -> Event? {
+        let context = CoreDataStack.sharedInstance.persistentContainer.viewContext
+        do {
+            let fetchRequest : NSFetchRequest<Event> = Event.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "eventId == %@", id)
+            let fetchedResults = try context.fetch(fetchRequest)
+            return fetchedResults.first
+        }
+        catch {
+            print ("fetch task failed", error)
+        }
+        return nil
+    }
+
 }

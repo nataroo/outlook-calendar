@@ -23,6 +23,7 @@ class CalendarViewCell: UICollectionViewCell {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        self.isAccessibilityElement = true
         self.setupLayout()
     }
     
@@ -37,7 +38,13 @@ class CalendarViewCell: UICollectionViewCell {
     }
     
     func setup(date: Date) {
+        // For UI tests
+        if date == DateTimeUtil.dateFromValues(year: 2018, month: 3, day: 29, hour: 0, minute: 0, second: 0) {
+            self.accessibilityIdentifier = "Mar-29-Test-Cell"
+        }
         self.label.text = String(DateTimeUtil.dayFromDate(date: date))
+        // TODO - If the day is 1 (start of month), also display the month name in the cell
+        // to give an indication to the user
         self.label.textColor = UIColor.black
     }
     
