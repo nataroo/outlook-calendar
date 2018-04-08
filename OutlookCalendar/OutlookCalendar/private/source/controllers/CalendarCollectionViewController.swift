@@ -141,12 +141,14 @@ class CalendarCollectionViewController: UICollectionViewController, UICollection
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        // As user scrolls thru the calendar, take the currently visible middle date and find out which
+        // As user scrolls thru the calendar, take the currently visible first date and find out which
         // month and year it belongs to
         if let indexPaths = self.collectionView?.indexPathsForVisibleItems {
-            let indexPath = indexPaths[indexPaths.count / 2]
-            let date = self.dates[indexPath[0] * self.numberOfWeekDays + indexPath[1]]
-            self.changeNavigationBarTitle(date: date)
+            if indexPaths.count > 0 {
+                let indexPath = indexPaths[0]
+                let date = self.dates[indexPath[0] * self.numberOfWeekDays + indexPath[1]]
+                self.changeNavigationBarTitle(date: date)
+            }
         }
     }
 
